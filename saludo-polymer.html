@@ -1,0 +1,119 @@
+
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="./bower_components/iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="./bower_components/iron-icons/iron-icons.html">
+
+<dom-module id="saludo-polymer">
+  <template > 
+    <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning"></style>
+    <style>
+      .brandName{
+        font-size:28px;
+        color: var(--paper-indigo-900);
+        font-weight: bold;
+        font-family: 'Megrim', sans-serif;
+        text-align:center;
+      }
+
+      .MsgError{
+        font-size:14px;
+        color: red;
+        font-weight: bold;
+        font-family: 'Megrim', sans-serif;
+        text-align:center;
+      }
+      paper-input{
+        width: 350px;
+      }
+      paper-button{
+        margin-left:0px;
+      }
+      paper-button.login{
+        background: var(--paper-indigo-900);
+        color: #ffffff;
+        font-size:12px;
+      }
+      paper-button.reset{
+        color: var(--paper-indigo-900);
+        font-size:12px;
+        margin-top:10px;
+        border: solid thin var(--paper-indigo-900);
+      }
+      .controls{
+        margin-top:10px;
+        width:350px;
+        margin-left:0px;
+        margin-right: 0px;
+      }
+    
+  
+      </style>
+
+<div style="height:calc(50vh - 100px);" class="layout horizontal center-center">
+  <div class="layout vertical center-center">
+    <div class="brandName">Inicia sesión [[prop1]]!</div>
+    <paper-input id="email" label="User Name"></paper-input>
+    <paper-input type="password" label="Password">
+    </paper-input>
+    <div class="MsgError">[[emailValid]]</div>
+    <div  flex tool class="controls" >
+      <paper-button class="login"  on-click="validateEmail" >Iniciar sesion</paper-button>
+      <paper-button class="reset">Olvide mi contraseña</paper-button>
+     
+    </div>
+  </div>
+</div>
+  
+  </template>
+
+  <script>
+    /**
+     * `saludo-polymer`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class SaludoPolymer extends Polymer.Element {
+      static get is() { return 'saludo-polymer'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'Emmanuel'
+          },
+          reflejada: {
+            type: String,
+            value: '',
+            emailValid: true
+          }
+        };
+      }
+
+      validateEmail(){
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+        if(re.test(this.$.email.value)){
+          this.emailValid = "Login correcto";
+        }else{
+          this.emailValid = "Correo invalido";
+        }
+       
+  }
+
+  cambiarValor() {
+        this.reflejada = Date.now();
+      }
+
+
+    }
+
+
+    window.customElements.define(SaludoPolymer.is, SaludoPolymer);
+  </script>
+</dom-module>
+
