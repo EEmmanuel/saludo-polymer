@@ -1,4 +1,3 @@
-
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="./bower_components/iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
@@ -7,66 +6,66 @@
 <link rel="import" href="./bower_components/iron-icons/iron-icons.html">
 
 <dom-module id="saludo-polymer">
-  <template > 
+  <template>
     <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning"></style>
     <style>
-      .brandName{
-        font-size:28px;
+      .brandName {
+        font-size: 28px;
         color: var(--paper-indigo-900);
         font-weight: bold;
         font-family: 'Megrim', sans-serif;
-        text-align:center;
+        text-align: center;
       }
 
-      .MsgError{
-        font-size:14px;
+      .MsgError {
+        font-size: 14px;
         color: red;
         font-weight: bold;
         font-family: 'Megrim', sans-serif;
-        text-align:center;
+        text-align: center;
       }
-      paper-input{
+
+      paper-input {
         width: 350px;
       }
-      paper-button{
-        margin-left:0px;
+
+      paper-button {
+        margin-left: 0px;
       }
-      paper-button.login{
+
+      paper-button.login {
         background: var(--paper-indigo-900);
         color: #ffffff;
-        font-size:12px;
+        font-size: 12px;
       }
-      paper-button.reset{
+
+      paper-button.reset {
         color: var(--paper-indigo-900);
-        font-size:12px;
-        margin-top:10px;
+        font-size: 12px;
+        margin-top: 10px;
         border: solid thin var(--paper-indigo-900);
       }
-      .controls{
-        margin-top:10px;
-        width:350px;
-        margin-left:0px;
+
+      .controls {
+        margin-top: 10px;
+        width: 350px;
+        margin-left: 0px;
         margin-right: 0px;
       }
-    
-  
-      </style>
+    </style>
+    <div class="layout vertical center-center">
+      <div class="brandName">Inicia sesión [[prop1]]!</div>
+      <paper-input id="email" label="User Name"></paper-input>
+      <paper-input type="password" label="Password">
+      </paper-input>
+      <div class="MsgError">[[emailValid]]</div>
+      <div flex tool class="controls">
+        <paper-button class="login" on-click="validateEmail">Iniciar sesion</paper-button>
+        <paper-button class="reset">Olvide mi contraseña</paper-button>
 
-<div style="height:calc(50vh - 100px);" class="layout horizontal center-center">
-  <div class="layout vertical center-center">
-    <div class="brandName">Inicia sesión [[prop1]]!</div>
-    <paper-input id="email" label="User Name"></paper-input>
-    <paper-input type="password" label="Password">
-    </paper-input>
-    <div class="MsgError">[[emailValid]]</div>
-    <div  flex tool class="controls" >
-      <paper-button class="login"  on-click="validateEmail" >Iniciar sesion</paper-button>
-      <paper-button class="reset">Olvide mi contraseña</paper-button>
-     
+      </div>
     </div>
-  </div>
-</div>
-  
+
   </template>
 
   <script>
@@ -86,26 +85,26 @@
             type: String,
             value: 'Emmanuel'
           },
-          reflejada: {
+          emailValid: {
             type: String,
-            value: '',
-            emailValid: true
+            value: 'test',
+            reflectToAttribute: true
           }
         };
       }
 
-      validateEmail(){
+      validateEmail() {
         const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-        if(re.test(this.$.email.value)){
+        if (re.test(this.$.email.value)) {
           this.emailValid = "Login correcto";
-        }else{
+        } else {
           this.emailValid = "Correo invalido";
         }
-       
-  }
 
-  cambiarValor() {
+      }
+
+      cambiarValor() {
         this.reflejada = Date.now();
       }
 
@@ -116,4 +115,3 @@
     window.customElements.define(SaludoPolymer.is, SaludoPolymer);
   </script>
 </dom-module>
-
